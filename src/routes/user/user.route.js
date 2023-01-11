@@ -1,24 +1,15 @@
 const express = require('express');
 const router = express.Router();
-// const {
-//   httpGetAllHotels,
-//   httpGetHotelById,
-//   httpCreateHotel,
-//   httpUpdateHotel,
-//   httpDeleteHotel,
-//   httpUploadHotelImage,
-//   httpmainPage
-// } = require('./hotel.controller');
+const {
+  usernameValidation,
+  passwordValidation
+} = require('./user.middleware')
+const {
+  httpSignupUser,
+  httpSigninUser
+} = require('./user.controller');
 
-// router.get('/main', httpmainPage);
-// router.post('/upload/:id', upload.single('hotel'), httpUploadHotelImage)
-// router.get('/', httpGetAllHotels);
-// router.get('/:id', httpGetHotelById)
-// router.post('/', httpCreateHotel)
-// router.put('/:id', httpUpdateHotel)
-// router.delete('/:id', httpDeleteHotel)
-
-router.post('/signup', httpSignupUser)
-router.post('/signin', httpSigninUser)
+router.post('/signup', usernameValidation, passwordValidation, httpSignupUser)
+router.post('/signin', usernameValidation, passwordValidation, httpSigninUser)
 
 module.exports = router
